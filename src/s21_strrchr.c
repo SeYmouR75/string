@@ -1,14 +1,15 @@
 #include "s21_string.h"
 
 char *s21_strrchr(const char *str, int c) {
-	const char *last_coincidence = S21_NULL;
-	if(str != S21_NULL && c){
-		const char *tmp_str = str; 
-		while(*tmp_str){
-			if(*tmp_str == (char)c)	last_coincidence = tmp_str;
-			tmp_str++;
+	char *result = S21_NULL;
+
+	s21_size_t lenght = s21_strlen(str);
+	for(s21_size_t i = 0; i <= lenght; i++){
+		if(str[i] == c){
+			result = ((char *)str) + i;
 		}
 	}
 
-	return (char *)last_coincidence;
+
+	return result;
 }
