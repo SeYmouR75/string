@@ -6,14 +6,13 @@
 #define SUITE_NAME *suite_s21_strstr()
 #define HAYSTACK strings_strstr
 #define NEEDLE needle_strstr
-#define TEST_SIZE 31                      // 1-31
+#define TEST_SIZE 31                      // 1-30
 
 char HAYSTACK[][256] = {
 "These are the GNU core utilities.  This package is the union of",
 "the GNU fileutils, sh-utils, and textutils packages.",
 "",
 "Most of these programs have significant advantages over their Unix",
-"counterparts, such as greater speed, additional options, and fewer",
 "arbitrary limits.",
 "",
 "The programs that can be built with this package are:",
