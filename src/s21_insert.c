@@ -11,7 +11,7 @@ void *s21_insert(const char *src, const char *str, size_t start_index) {  if (sr
       s21_memcpy(ptr, src, start_index);  
                                           
       s21_memcpy(ptr + start_index, str,
-                 s21_strlen(str));  /
+                 s21_strlen(str));  
       s21_memcpy(ptr + start_index + s21_strlen(str),
                  src + start_index,  
                                      
