@@ -1,70 +1,25 @@
 #include "s21_string.h"
 
-void *s21_memmove(void *dest, const void *src, int n) {
-    char *str1 = (char *) dest;
-    char *str2 = (char *) src;
-
-    if (dest != S21_NULL && src != S21_NULL) {
-        int i;
-        if (str1 > str2) {
-            i = n;
-            while (i--)
-                *(str1 + i) = *(str2 + i);
-                 
-        } else {
-            i = 0;
-            while (i++ < n)
-                *(str1 + (i - 1)) = *(str2 + (i - 1));
-        }
+void *s21_trim(const char *src, const char *trim_chars) {  char *ptr = S21_NULL;
+  if (src && trim_chars) {
+    char *start = (char *)src;  // указатель на начало исходной строки
+    char *end =
+        (char *)src + s21_strlen(src);  // указатель на конец исходной строки
+    for (; *start &&
+           s21_strchr(trim_chars,
+                      *start);  // проверяем что указатель на текущий символ
+                                // не нулевой и находится в trim_chars
+         start++)  // двигаем указатель start вперед пока не встретим trim_chars
+      ;
+    for (; end != start && s21_strchr(trim_chars, *(end - 1));
+         end--)  // проверяем тоже самое для end
+      ;  // двигаем указатель end c конца строки пока не встретим trim_chars
+    ptr = (char *)malloc((end - start + 1) * sizeof(char));
+    if (ptr) {
+      s21_strncpy(ptr, start,
+                  end - start);  // копируем в новую строку start до end
+      *(ptr + (end - start)) = '\0';
     }
-
-    return str1;
+  }
+  return ptr;
 }
-
-char *s21_strcpy(char *dest, const char *src) {
-    char *ptr = dest;
-    if (src != S21_NULL && dest != S21_NULL) {
-        while (*src != '\0') {
-            *dest = *src;
-            dest++;
-            src++;
-        }
-
-        *dest = '\0';
-    }
-
-    return ptr;
-}
-
-void *s21_trim(const char *src, const char *trim_chars) {
-    void *result = S21_NULL;
-    static char *buffer = S21_NULL;
-    buffer = malloc(s21_strlen(src) + 1);
-   
-   	       s21_strcpy(buffer, src);
-
-    if (src) {
-        if (trim_chars && *trim_chars) {
-            for (int i = (int) s21_strlen(src) - 1;
-                 i >= 0 && s21_strrchr(trim_chars, buffer[i]) != S21_NULL; i--)
-                buffer[i] = '\0';
-
-            while (buffer[0] != '\0' && s21_strrchr(trim_chars, buffer[0]) != S21_NULL)
-                s21_memmove(&buffer[0], &buffer[1], s21_strlen(src));
-
-            result = buffer;
-        } else {
-            char trim_specsymbol[] = " \n\t\r\x0B\f";
-            for (int i = (int) s21_strlen(src) - 1;
-                 i >= 0 && s21_strrchr(trim_specsymbol, buffer[i]) != S21_NULL; i--)
-                buffer[i] = '\0';
-
-            while (buffer[0] != '\0' && s21_strrchr(trim_specsymbol, buffer[0]) != S21_NULL)
-                s21_memmove(&buffer[0], &buffer[1], s21_strlen(src));
-
-            result = buffer;
-        }
-    }
-    return result;
-}
-
