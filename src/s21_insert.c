@@ -10,7 +10,7 @@ char *res;
     ptr =
         (char *)malloc((s21_strlen(src) + s21_strlen(str) + 1) * sizeof(char));
     if (ptr != S21_NULL && start_index <= s21_strlen(src)) {
-      s21_memcpy(ptr, src, start_index);  
+      s21_memcpy(ptr, src, start_index);  // копируем первую часть с начала
                                           
       s21_memcpy(ptr + start_index, str,
                  s21_strlen(str));  
