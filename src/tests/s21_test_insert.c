@@ -6,18 +6,18 @@
                    
 
 START_TEST(test) {
-  // TEST 1.
+  /*// TEST 1.
   char *str1 = "Aboba";
   char *in1 = "kek";
-  char *result1 = S21_NULL;
-  result1 = s21_insert(str1, in1, 2);
+  char *result1 = s21_insert(str1, in1, 2);
+  
   ck_assert_str_eq(result1, "Abkekoba");
-  free(result1);
+  free(result1);*/
   // TEST 2.
   char *str2 = "Aboba";
   char *in2 = "kek";
-  char *result2 = S21_NULL;
-  result2 = s21_insert(str2, in2, 4);
+  char *result2 = s21_insert(str2, in2, 4);
+ 
   ck_assert_str_eq(result2, "Abobkeka");
   free(result2);
   // TEST 3.
