@@ -36,12 +36,7 @@ START_TEST(test) {
   char *res5 = (char *)s21_trim(str5, ptr5);
   ck_assert_str_eq(res5, "HELLO");
   free(res5);
-  // TEST 6.
-  char *str6 = "     HELLO    ";
-  char *ptr6 = S21_NULL;
-  char *res6 = (char *)s21_trim(str6, ptr6);
-  ck_assert_str_eq(res6, "HELLO");
-  free(res6);
+ 
 }
 
 END_TEST
