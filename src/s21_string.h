@@ -99,3 +99,43 @@ void *s21_to_upper(const char *str);
 int s21_sprintf(char *str, const char *format, ...);
 
 int s21_sscanf(const char* str, const char* format, ...);
+
+// declarates functions for s21_sscanf
+
+int skip_spaces(const char* str, const char* sym);
+
+const char* get_width_sf(const char* format, Flags* flags);
+
+const char* set_flags(const char* format, Flags* flags);
+
+char set_length_int(char size, char spec);
+
+const char* set_scale_number_system(const char* str, Flags* flags);
+
+const char* parse_integer(char spec, const char* str, void* dest, char size,
+                    int* count_success, Flags flags);
+
+const char* specificator_u(char spec, const char* str, void* arg, char size,
+                   int* count_success, Flags flags);
+
+const char* parser(const char* str, const char* string, const char* format,
+                    Flags flags, void* arg, int* count_success);
+
+const char* specificator_p(const char* str, Flags flags, void* arg, char size,
+                       int* count_success, char spec);
+
+char convert_char_to_int(char c);
+
+const char* specificator_d_i(const char* str, Flags flags, long long* num);
+
+const char* specificator_s(const char* str, Flags flags, void* arg, int* count_res);
+
+const char* set_length_float(const char* str, Flags flags, void* arg, int* count_res,
+                       char size);
+
+const char* analyse_float_number(const char* str, Flags flags, long double* num,
+                   int* count_res);
+
+int s21_strncasecmp(const char *s1, const char *s2, s21_size_t n);
+
+int check_nan_or_inf(const char* str, long double* num);

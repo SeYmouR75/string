@@ -1,44 +1,5 @@
 #include "s21_string.h"
 
-int skip_spaces(const char* str, const char* sym);
-
-const char* get_width_sf(const char* format, Flags* flags);
-
-const char* set_flags(const char* format, Flags* flags);
-
-char set_length_int(char size, char spec);
-
-const char* set_scale_number_system(const char* str, Flags* flags);
-
-const char* parse_integer(char spec, const char* str, void* dest, char size,
-                    int* count_success, Flags flags);
-
-const char* specificator_u(char spec, const char* str, void* arg, char size,
-                   int* count_success, Flags flags);
-
-const char* parser(const char* str, const char* string, const char* format,
-                    Flags flags, void* arg, int* count_success);
-
-const char* specificator_p(const char* str, Flags flags, void* arg, char size,
-                       int* count_success, char spec);
-
-char convert_char_to_int(char c);
-
-const char* specificator_d_i(const char* str, Flags flags, long long* num);
-
-const char* specificator_s(const char* str, Flags flags, void* arg, int* count_res);
-
-const char* set_length_float(const char* str, Flags flags, void* arg, int* count_res,
-                       char size);
-
-const char* analyse_float_number(const char* str, Flags flags, long double* num,
-                   int* count_res);
-
-int s21_strncasecmp(const char *s1, const char *s2, s21_size_t n);
-
-int check_nan_or_inf(const char* str, long double* num);
-
-
 int s21_sscanf(const char* str, const char* format, ...) {
   char specs[] = "diuoxXcsnpfFeEgG%";
   va_list args;
@@ -80,7 +41,6 @@ int s21_sscanf(const char* str, const char* format, ...) {
   return count_succes;
 }
 
-// skip spaces
 int skip_spaces(const char* str, const char* sym) {
   int i = 0;
 
@@ -91,7 +51,6 @@ int skip_spaces(const char* str, const char* sym) {
   return i;
 }
 
-// set flags for format specificators
 const char* set_flags(const char* format, Flags* flags) {
   flags->flag_w = 1;
   flags->number_systems = 10;
@@ -106,7 +65,6 @@ const char* set_flags(const char* format, Flags* flags) {
   return format;
 }
 
-// retrieves the field width from the format string
 const char* get_width_sf(const char* format, Flags* flags) {
   flags->width = 0;
   while (isdigit(*format) &&
@@ -117,7 +75,6 @@ const char* get_width_sf(const char* format, Flags* flags) {
   return format;
 }
 
-// parse specificators
 const char* parser(const char* str, const char* string, const char* format,
                     Flags flags, void* arg, int* count_success) {
   char spec = *format;
@@ -185,7 +142,6 @@ const char* parser(const char* str, const char* string, const char* format,
   return str;
 }
 
-// for integer type
 const char* parse_integer(char spec, const char* str, void* dest, char size,
                     int* count_success, Flags flags) {
   flags.length = set_length_int(size, spec);
@@ -199,7 +155,6 @@ const char* parse_integer(char spec, const char* str, void* dest, char size,
   return str;
 }
 
-// get len
 char set_length_int(char size, char spec) {
   char res = 0;
   if (spec == 'i' || spec == 'u' || spec == 'd') {
@@ -213,7 +168,6 @@ char set_length_int(char size, char spec) {
   return res;
 }
 
-// система счисления
 const char* set_scale_number_system(const char* str, Flags* flags) {
   str += skip_spaces(str, " \t\b\n\r\f\x0B");
   if (*str == '0') flags->number_systems = 8;
@@ -221,7 +175,6 @@ const char* set_scale_number_system(const char* str, Flags* flags) {
   return str;
 }
 
-// specificators %d and %i
 const char* specificator_d_i(const char* str, Flags flags, long long* num) {
   int n = 0;
   const char* s = str;
@@ -266,11 +219,9 @@ if (!(isdigit(*str)) && (*str == '-' || *str == '+')) {
   return res;
 }
 
-// transform char to int
 char convert_char_to_int(char c) {
   char flag = '?';
 
-  // Проверка на допустимые символы
   if (('0' <= c && c <= '9') || ('a' <= c && c <= 'f') || ('A' <= c && c <= 'F')) {
     switch (c) {
       case 'a':
@@ -304,7 +255,6 @@ char convert_char_to_int(char c) {
   return flag;
 }
 
-// specificator_ued parse_integer types
 const char* specificator_u(char spec, const char* str, void* arg, char size,
                    int* count_success, Flags flags) {
   spec = 'u';
@@ -318,25 +268,20 @@ const char* specificator_u(char spec, const char* str, void* arg, char size,
   return str;
 }
 
-// specificators %s
 const char* specificator_s(const char* str, Flags flags, void* arg,
                        int* count_res) {
   str += skip_spaces(str, " \t\n\r\b\f\x0B");
   int i = 0;
   int skip = 0;
 
-  // Обработка пробельных символов и копирование в arg
   while (*str && !skip && i < flags.width) {
     if (arg) {
       *((char*)arg + i) = *str;
     }
-    // Переход к следующему символу
     str++;
-    // Установка флага, если текущий символ - пробельный
     skip = isspace(*str);
     i++;
   }
-  // Завершение строки в arg
   if (arg) {
     *((char*)arg + i) = '\0';
     *count_res += 1;
@@ -344,7 +289,6 @@ const char* specificator_s(const char* str, Flags flags, void* arg,
   return str;
 }
 
-// specificators %p
 const char* specificator_p(const char* str, Flags flags, void* arg, char size, int* count_success, char spec) {
     if (arg) {
         char original_spec = spec;
@@ -360,7 +304,6 @@ const char* specificator_p(const char* str, Flags flags, void* arg, char size, i
     return str;
 }
 
-// specificators %f
 const char* set_length_float(const char* str, Flags flags, void* arg, int* count_res,
                        char size) {
   long double num;
@@ -394,20 +337,15 @@ const char* analyse_float_number(const char* str, Flags flags, long double* num,
       endptr = S21_NULL;
               }
     if (!check) {
-        // Используем strtold для преобразования строки в long double
         temp_num = strtold(str, (char**)&endptr);
-        // Проверка на успешное преобразование
         if (endptr == str) {
-            endptr = S21_NULL; // Не удалось преобразовать
+            endptr = S21_NULL;
         } else {
-            // Применяем флаги
             temp_num *= flags.flag_minus;
             if (flags.flag_plus) {
                 temp_num = fabsl(temp_num);
             }
-            // Увеличиваем счетчик успешных преобразований
             (*count_res)++;
-            // Присваиваем значение num только после успешного преобразования
             *num = temp_num;
             if (flags.flag_star) {  
                 endptr += 2;
@@ -417,7 +355,6 @@ const char* analyse_float_number(const char* str, Flags flags, long double* num,
     return endptr;
 }
 
-// checking in nan or infinity numbers
 int s21_strncasecmp(const char *s1, const char *s2, s21_size_t n) {
     int result = 0;  
 
