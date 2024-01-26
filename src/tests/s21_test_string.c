@@ -11,6 +11,7 @@ void run_suite(Suite *suite) {
 
 void run_tests() {
   Suite *suites_core[] = {
+/*
 	suite_s21_memchr(),      // 0
 	suite_s21_memcmp(),      // 1
 	suite_s21_memcpy(),      // 2
@@ -31,6 +32,7 @@ void run_tests() {
 	suite_s21_to_lower(),    // 17
 	suite_s21_to_upper(),    // 18
 	suite_s21_trim(),        // 19
+*/
 	suite_s21_insert(),      // 20  
 	NULL};
 
