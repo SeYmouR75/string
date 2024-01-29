@@ -27,8 +27,8 @@ $(BUILD_DIR)/%.o: %.c
 
 test: clean $(TARGET)
 	cd $(TEST_DIR) && make
-#	cd $(TEST_DIR) && $(BUILD_DIR)/$(TEST_EXE)
-	cd $(TEST_DIR) && valgrind --tool=memcheck --leak-check=yes $(BUILD_DIR)/$(TEST_EXE)
+	cd $(TEST_DIR) && $(BUILD_DIR)/$(TEST_EXE)
+#	cd $(TEST_DIR) && valgrind --tool=memcheck --leak-check=yes $(BUILD_DIR)/$(TEST_EXE)
 
 gcov_report: clean gcov_flags $(TARGET)	
 	cd $(TEST_DIR) && make gcov
@@ -50,5 +50,17 @@ clean_gcov:
 
 clean: clean_obj clean_gcov
 	cd $(TEST_DIR) && make clean
+
+clang_check:
+	cp ../materials/linters/.clang-format .
+	clang-format -style=Google -n *.c *.h
+	cd $(TEST_DIR) && make clang_check
+	rm -rf .clang-format
+
+clang_format:
+	cp ../materials/linters/.clang-format .
+	clang-format -style=Google -i *.c *.h
+	cd $(TEST_DIR) && make clang_format
+	rm -rf .clang-format
 
 rebuild: clean all

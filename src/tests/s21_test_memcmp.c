@@ -43,7 +43,6 @@ START_TEST(test) {
   ck_assert_int_lt(actualres, 0);
   ck_assert_int_lt(expectedres, 0);
 
-
   // TEST 5
   char *f5 = " \n\0";
   char *s5 = " \0";
@@ -65,15 +64,11 @@ START_TEST(test) {
 END_TEST
 
 Suite SUITE_NAME {
-	Suite *suite = suite_create(SUITE_LABEL);
+  Suite *suite = suite_create(SUITE_LABEL);
 
-	TCase *tcase = tcase_create("case");
-	tcase_add_test(tcase, test);
-  	suite_add_tcase(suite, tcase);
+  TCase *tcase = tcase_create("case");
+  tcase_add_test(tcase, test);
+  suite_add_tcase(suite, tcase);
 
-
- 	return suite;
+  return suite;
 }
-
-
-

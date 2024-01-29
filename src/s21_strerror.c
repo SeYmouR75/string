@@ -6,7 +6,6 @@
 #define ERROR "No error information"
 #define ERRORLIST errorListMac
 
-
 static const char *errorListMac[] = {
     [0] = "Undefined error: 0",
     [1] = "Operation not permitted",
@@ -272,7 +271,7 @@ char *s21_strerror(int errnum) {
     const char *errorMsg = ERRORLIST[errnum];
     if (errorMsg != NULL) {
       s21_strncpy(result, errorMsg, sizeof(result) - 1);
-      result[sizeof(result) - 1] = '\0';  
+      result[sizeof(result) - 1] = '\0';
     } else {
       s21_sprintf(result, "%s %d", ERROR, errnum);
     }
@@ -280,7 +279,3 @@ char *s21_strerror(int errnum) {
 
   return result;
 }
-
-
-
-

@@ -2,8 +2,8 @@
 #define S21_TEST_STRING_H
 
 #include <check.h>
-#include <string.h>
 #include <stdlib.h>
+#include <string.h>
 
 #include "../s21_string.h"
 

@@ -1,28 +1,28 @@
+#include <ctype.h>
+#include <math.h>
+#include <stdarg.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <stdarg.h>
-#include <math.h>
-#include <ctype.h>
 
 typedef unsigned long s21_size_t;
-#define S21_NULL (void*)0
+#define S21_NULL (void *)0
 typedef struct {
-	s21_size_t minus: 1;  
-	s21_size_t plus: 1;
-	s21_size_t space: 1;
-	s21_size_t hash: 1;
-	s21_size_t zero: 1;
-	s21_size_t width: 32;
-	s21_size_t dot: 1;
-	s21_size_t precision: 32;
-	s21_size_t length_h: 2;
-	s21_size_t length_l: 2;
-	s21_size_t length_L: 1;
-	s21_size_t type: 7;
-	s21_size_t exp: 16;
-	s21_size_t negative: 1;
-	s21_size_t sign: 6;
-	s21_size_t space_symbol: 6;
+  s21_size_t minus : 1;
+  s21_size_t plus : 1;
+  s21_size_t space : 1;
+  s21_size_t hash : 1;
+  s21_size_t zero : 1;
+  s21_size_t width : 32;
+  s21_size_t dot : 1;
+  s21_size_t precision : 32;
+  s21_size_t length_h : 2;
+  s21_size_t length_l : 2;
+  s21_size_t length_L : 1;
+  s21_size_t type : 7;
+  s21_size_t exp : 16;
+  s21_size_t negative : 1;
+  s21_size_t sign : 6;
+  s21_size_t space_symbol : 6;
 } STRSPEC;
 
 union un_double {
@@ -56,7 +56,16 @@ typedef struct {
   char length;
 } Flags;
 
-enum  {byte_size = 8, min_buf_size = 129, mid_buf_size = 1000, max_buf_size = 20000, binary_radix = 2, octal_radix = 8, decimal_radix = 10, hex_radix = 16};
+enum {
+  byte_size = 8,
+  min_buf_size = 129,
+  mid_buf_size = 1000,
+  max_buf_size = 20000,
+  binary_radix = 2,
+  octal_radix = 8,
+  decimal_radix = 10,
+  hex_radix = 16
+};
 
 void *s21_memchr(const void *str, int c, s21_size_t n);
 
@@ -98,4 +107,4 @@ void *s21_to_upper(const char *str);
 
 int s21_sprintf(char *str, const char *format, ...);
 
-int s21_sscanf(const char* str, const char* format, ...);
+int s21_sscanf(const char *str, const char *format, ...);

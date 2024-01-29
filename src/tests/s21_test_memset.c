@@ -116,19 +116,19 @@ START_TEST(s21_memset_10) {
 }
 END_TEST
 
-Suite *SUITE_NAME(void) {
-    Suite *suite = suite_create(SUITE_LABEL);
-    TCase *tcase = tcase_create("case");
-    tcase_add_test(tcase, s21_memset_01);
-    tcase_add_test(tcase, s21_memset_02);
-    tcase_add_test(tcase, s21_memset_03);
-    tcase_add_test(tcase, s21_memset_04);
-    tcase_add_test(tcase, s21_memset_05);
-    tcase_add_test(tcase, s21_memset_06);
-    tcase_add_test(tcase, s21_memset_07);
-    tcase_add_test(tcase, s21_memset_08);
-    tcase_add_test(tcase, s21_memset_09);
-    tcase_add_test(tcase, s21_memset_10);
-    suite_add_tcase(suite, tcase);
-    return suite;
+Suite* SUITE_NAME(void) {
+  Suite* suite = suite_create(SUITE_LABEL);
+  TCase* tcase = tcase_create("case");
+  tcase_add_test(tcase, s21_memset_01);
+  tcase_add_test(tcase, s21_memset_02);
+  tcase_add_test(tcase, s21_memset_03);
+  tcase_add_test(tcase, s21_memset_04);
+  tcase_add_test(tcase, s21_memset_05);
+  tcase_add_test(tcase, s21_memset_06);
+  tcase_add_test(tcase, s21_memset_07);
+  tcase_add_test(tcase, s21_memset_08);
+  tcase_add_test(tcase, s21_memset_09);
+  tcase_add_test(tcase, s21_memset_10);
+  suite_add_tcase(suite, tcase);
+  return suite;
 }
