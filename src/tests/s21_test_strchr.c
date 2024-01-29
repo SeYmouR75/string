@@ -45,16 +45,16 @@ char STRINGS[][256] = {
 START_TEST(test) {
 	char *actual_result;
 	char *expected_result;
-  char *ascii = "!#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[]^_`abcdefghijklmnopqrstuvwxyz{|}~"; // 92
+	char *ascii = "!#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[]^_`abcdefghijklmnopqrstuvwxyz{|}~"; // 92
 	char *ptr_symbol = ascii;
 
-  while(*ptr_symbol){
+  do {
     actual_result = ACTUAL(STRINGS[_i], *ptr_symbol);
     expected_result = EXPECTED(STRINGS[_i], *ptr_symbol);
-    // printf("\n str:%s | sym:%c\n", STR[_i], *ptr_symbol);     //  print for debug
-    ck_assert_ptr_eq (actual_result, expected_result);
-    ptr_symbol++;
-  }
+//    printf("\n str:%s | sym:%c\n", STRINGS[_i], *ptr_symbol);     //  print for debug
+    ck_assert_pstr_eq (actual_result, expected_result);
+  } while(*ptr_symbol++);
+
 }
 END_TEST
 

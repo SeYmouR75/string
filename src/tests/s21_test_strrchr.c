@@ -46,20 +46,14 @@ START_TEST(test) {
 	char *expected_result;
 	char *ascii = "!#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[]^_`abcdefghijklmnopqrstuvwxyz{|}~"; // 92
 	char *ptr_symbol = ascii;
-	while(*ptr_symbol) {
-		actual_result = ACTUAL(STRINGS[_i], *ptr_symbol);
-		expected_result = EXPECTED(STRINGS[_i], *ptr_symbol);
 
-		//printf("\n str:%s char:%c res_orig:%s res_act:%s \n", STRINGS[_i], *ptr_symbol, actual_result, expected_result);  //print for debug
-		
-		if(actual_result || expected_result) {
-			ck_assert_str_eq(actual_result, expected_result);
-		} else {
-			ck_assert_ptr_eq (actual_result, expected_result);
-		}
+  do {
+    actual_result = ACTUAL(STRINGS[_i], *ptr_symbol);
+    expected_result = EXPECTED(STRINGS[_i], *ptr_symbol);
+//printf("\n str:%s char:%c res_orig:%s res_act:%s \n", STRINGS[_i], *ptr_symbol, actual_result, expected_result);  //print for debug
+    ck_assert_pstr_eq (actual_result, expected_result);
+  } while(*ptr_symbol++);
 
-		ptr_symbol++;
-	}
 }
 END_TEST
 

@@ -46,23 +46,20 @@ char NEEDLE[][20] = {
 ".",
 " ",
 "a",
-"README-hacking file."
+"README-hacking file.",
+""
 };
 
 START_TEST(test) { 
 	char *actual_result;
 	char *expected_result;
-	for (int i = 0; i < 5; i++){
+	for (int i = 0; i < 6; i++){
 		actual_result = ACTUAL(HAYSTACK[_i], NEEDLE[i]);
 		expected_result = EXPECTED(HAYSTACK[_i], NEEDLE[i]);
 
 		//printf("\n str1:%s | str2:%s | res_exp:%s | res_act:%s \n", HAYSTACK[_i], NEEDLE[i], expected_result, actual_result);     //  print for debug
 
-		if(actual_result || expected_result) {
-			ck_assert_str_eq(actual_result, expected_result);
-		} else {
-			ck_assert_ptr_eq (actual_result, expected_result);
-		}
+	    ck_assert_pstr_eq (actual_result, expected_result);
 	}
 }
 END_TEST

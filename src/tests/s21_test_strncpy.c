@@ -44,21 +44,17 @@ char STRINGS[][256] = {
 START_TEST(test) { 
 	char *actual_result;
 	char *expected_result;
-	char str1[100] = {"asdasdasdasd"};
-	char str2[100] = {"asdasdasdasd"};
-    int range = rand()%10;
+	char str1[256] = {"One valid (and intended) use of strncpy() is to copy a C  string  to  a fixed-length  buffer  while  ensuring both that the buffer is not over‐flowed and that unused bytes in the destination buffer."};
+	char str2[256] = {"One valid (and intended) use of strncpy() is to copy a C  string  to  a fixed-length  buffer  while  ensuring both that the buffer is not over‐flowed and that unused bytes in the destination buffer."};
+    int range = rand()%100;
 
 
 	actual_result = ACTUAL(str1, STRINGS[_i], range);
 	expected_result = EXPECTED(str2, STRINGS[_i], range);
 
-	//printf("\n str:%s range:%d res_orig:%s res_act:%s \n", STRINGS[_i], range, expected_result, actual_result); // print for debug
+//	printf("\n str:%s range:%d res_orig:%s res_act:%s \n", STRINGS[_i], range, expected_result, actual_result); // print for debug
 
-	if(actual_result || expected_result) {
-		ck_assert_str_eq(actual_result, expected_result);
-	} else {
-		ck_assert_ptr_eq (actual_result, expected_result);
-	}
+    ck_assert_pstr_eq (actual_result, expected_result);
 }
 END_TEST
 

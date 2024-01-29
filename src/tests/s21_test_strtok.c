@@ -44,19 +44,22 @@ char STRINGS[][256] = {
 START_TEST(test){
     char *actual_result;
 	char *expected_result;
-	char *sep = " toO";
-	char *str1 = STRINGS[_i];
-	char *str2 = STRINGS[_i];
+	char *sep = " 2IDt";
+	char str1[256] = {0};
+	char str2[256] = {0};
+	strncpy(str1, STRINGS[_i], 256);
+	strncpy(str2, STRINGS[_i], 256);
 
 	actual_result = ACTUAL(str1, sep);
 	expected_result = EXPECTED(str2, sep);
 
-    //printf("\n str1:%s | str2:%s | sep:%s | res_exp:%s | res_act:%s \n", str1, str2, sep, expected_result, actual_result);     //  print for debug
+	while(expected_result) {
+//		printf("\n sep:%s | res_exp:%s | res_act:%s \n", sep, expected_result, actual_result);     //  print for debug
 
-	if(actual_result || expected_result) {
-		ck_assert_str_eq(actual_result, expected_result);
-	} else {
-		ck_assert_ptr_eq (actual_result, expected_result);
+		ck_assert_pstr_eq (actual_result, expected_result);
+
+		actual_result = ACTUAL(S21_NULL, sep);
+		expected_result = EXPECTED(S21_NULL, sep);
 	}
 }
 END_TEST

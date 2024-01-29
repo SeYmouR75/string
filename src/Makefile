@@ -27,8 +27,8 @@ $(BUILD_DIR)/%.o: %.c
 
 test: clean $(TARGET)
 	cd $(TEST_DIR) && make
-	cd $(TEST_DIR) && $(BUILD_DIR)/$(TEST_EXE)
-#	cd $(TEST_DIR) && valgrind --tool=memcheck --leak-check=yes $(BUILD_DIR)/$(TEST_EXE)
+#	cd $(TEST_DIR) && $(BUILD_DIR)/$(TEST_EXE)
+	cd $(TEST_DIR) && valgrind --tool=memcheck --leak-check=yes $(BUILD_DIR)/$(TEST_EXE)
 
 gcov_report: clean gcov_flags $(TARGET)	
 	cd $(TEST_DIR) && make gcov
